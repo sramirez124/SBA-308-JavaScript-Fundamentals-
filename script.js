@@ -104,7 +104,10 @@ const CourseInfo = {
     catch(err){
         console.log("Course ID is " + err);
     }
+  }
 
+  function dueDateCheck(){
+    
   }
   
   const courseIDCheck = checkCourseID(CourseInfo.id, AssignmentGroup.course_id);
