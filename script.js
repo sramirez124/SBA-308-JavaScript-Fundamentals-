@@ -95,7 +95,20 @@ const CourseInfo = {
   
     return result;
   }
+
+  function checkCourseID(courseID, assignment_id){
+    try{
+        if(courseID.id === assignment_id) throw "correct";
+        if(courseID.id !== assignment_id) throw "incorrect";
+    } 
+    catch(err){
+        console.log("Course ID is " + err);
+    }
+
+  }
   
+  const courseIDCheck = checkCourseID(CourseInfo.id, AssignmentGroup.course_id);
   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   
-  console.log(result);
+  console.log(courseIDCheck);
+  // console.log(result);
