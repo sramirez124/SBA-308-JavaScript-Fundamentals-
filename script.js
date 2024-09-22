@@ -98,19 +98,26 @@ const CourseInfo = {
 
   function checkCourseID(courseID, assignment_id){
     try{
-        if(courseID.id === assignment_id) throw "correct";
-        if(courseID.id !== assignment_id) throw "incorrect";
+        if (courseID.id === assignment_id) throw "correct";
+        if (courseID.id !== assignment_id) throw "incorrect";
     } 
     catch(err){
         console.log("Course ID is " + err);
     }
   }
 
-  function dueDateCheck(){
-    
+  function dueDateCheck(ag, submissions){
+    for (let i = 0; i < submissions.length; i++) {
+      if (submissions.submitted_at < ag.due_at){
+        // code to reduce points goes here
+        console.log("Assignment is handing in on time")
+      } else {
+        console.log("Assignment is late")
+      }
+    }
   }
-  
   const courseIDCheck = checkCourseID(CourseInfo.id, AssignmentGroup.course_id);
+  const dueDateCheck = dueDateCheck(AssignmentGroup, LearnerSubmissions);
   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   
   console.log(courseIDCheck);
