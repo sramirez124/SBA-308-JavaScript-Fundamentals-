@@ -81,8 +81,8 @@ const CourseInfo = {
     const result = [
       {
         id: 125,
-        avg: 0.985, // (47 + 150) / (50 + 150)
-        1: 0.94, // 47 / 50
+        avg: 0.98, // (47 + 150) / (50 + 150)
+        1: assignmentCheck(125, 1),//0.94, // 47 / 50
         2: 1.0 // 150 / 150
       },
       {
@@ -92,33 +92,36 @@ const CourseInfo = {
         2: 0.833 // late: (140 - 15) / 150
       }
     ];
-  
+    
+    function assignmentCheck(id, agID){
+      let assignment = 0;
+      if (ag.assignment.assignment_id === agID && submissions.submission.assignment_id === agID){
+        assignment = (submissions[0 + agID].submission.score / ag[0 + agID].assignment.points_possible);
+      }
+      return assignment;
+    }
+
     return result;
   }
 
-  function checkCourseID(courseID, assignment_id){
+  function checkCourseID(courseID, assignment){
     try{
-        if (courseID.id === assignment_id) throw "correct";
-        if (courseID.id !== assignment_id) throw "incorrect";
+        if (courseID === assignment) throw "correct";
+        if (courseID !== assignment) throw "incorrect";
     } 
     catch(err){
-        console.log("Course ID is " + err);
+        // console.log("Course ID is " + err);
     }
   }
 
-  function dueDateCheck(ag, submissions){
-    for (let i = 0; i < submissions.length; i++) {
-      if (submissions.submitted_at < ag.due_at){
-        // code to reduce points goes here
-        console.log("Assignment is handing in on time")
-      } else {
-        console.log("Assignment is late")
-      }
-    }
-  }
-  const courseIDCheck = checkCourseID(CourseInfo.id, AssignmentGroup.course_id);
-  const dueDateCheck = dueDateCheck(AssignmentGroup, LearnerSubmissions);
+  // function dueDateCheck(ag, submissions, id){
+  //   for (let i = 0; i < submissions.length; i++) {
+  //     console.log(submissions[0 + i].submission.submitted_at);
+  //   }
+  // }
+  // const courseIDCheck = checkCourseID(CourseInfo.id, AssignmentGroup.course_id);
+  // const dueDate = dueDateCheck(AssignmentGroup, LearnerSubmissions);
   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   
-  console.log(courseIDCheck);
-  // console.log(result);
+  // console.log(courseIDCheck);
+  console.log(result);
