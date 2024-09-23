@@ -95,9 +95,7 @@ const CourseInfo = {
     
     function assignmentCheck(id, agID){
       let assignment = 0;
-      if (ag.assignment.assignment_id === agID && submissions.submission.assignment_id === agID){
-        assignment = (submissions[0 + agID].submission.score / ag[0 + agID].assignment.points_possible);
-      }
+        assignment = submissions[0].submission.score / ag.assignments[0].points_possible;
       return assignment;
     }
 
@@ -123,5 +121,8 @@ const CourseInfo = {
   // const dueDate = dueDateCheck(AssignmentGroup, LearnerSubmissions);
   const result = getLearnerData(CourseInfo, AssignmentGroup, LearnerSubmissions);
   
+  const a = LearnerSubmissions[0].submission.score;
+  const b = AssignmentGroup.assignments[0].points_possible;
+  console.log(a / b);
   // console.log(courseIDCheck);
   console.log(result);
