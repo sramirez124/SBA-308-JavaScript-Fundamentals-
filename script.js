@@ -83,7 +83,7 @@ const CourseInfo = {
         id: 125,
         avg: 0.98, // (47 + 150) / (50 + 150)
         1: assignmentCheck(125, 1),//0.94, // 47 / 50
-        2: 1.0 // 150 / 150
+        2: assignmentCheck(125, 2) // 150 / 150
       },
       {
         id: 132,
@@ -95,7 +95,7 @@ const CourseInfo = {
     
     function assignmentCheck(id, agID){
       let assignment = 0;
-        assignment = submissions[0].submission.score / ag.assignments[0].points_possible;
+        assignment = submissions[agID - 1].submission.score / ag.assignments[agID - 1].points_possible;
       return assignment;
     }
 
